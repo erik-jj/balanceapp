@@ -1,7 +1,8 @@
 import React from "react";
-import { Button } from "flowbite-react";
+import { useNavigate } from "react-router-dom";
 
 const LandingContent = () => {
+  const navigate = useNavigate();
   return (
     <>
       <div className="h-4/6 w-full overflow-hidden  grid grid-cols-1 lg:grid-cols-2 bg-no-repeat bg-bottom lg:px-12 gap-5 mt-6 md:mt-12">
@@ -16,9 +17,12 @@ const LandingContent = () => {
             únete ahora y comienza a llevar el control de tu economía.
           </p>
           <br />
-          <Button class="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-blue-600 hover:bg-blue-800 px-2 py-1  text-white shadow-sm  ">
+          <button
+            onClick={() => navigate("/create-account")}
+            className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-blue-600 hover:bg-blue-800 px-4 py-2 text-base font-medium text-white shadow-sm "
+          >
             <p className="text-base font-medium">Crear cuenta</p>
-          </Button>
+          </button>
           <br />
         </div>
         <div className="md:flex lg:items-center md:items-end items-center justify-center  ">
