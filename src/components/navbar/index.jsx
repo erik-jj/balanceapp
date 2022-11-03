@@ -1,21 +1,20 @@
 import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import logo from '../../assets/logos/logo-horizontal.png';
+import logo from "../../assets/logos/logo-horizontal.png";
+import { useNavigate } from "react-router-dom";
+
 export default function NavBarTop() {
+  const navigate = useNavigate();
   return (
     <Popover className="relative bg-white  ">
       <div className="mx-auto md:px-12 px-2 ">
         <div className="flex items-center justify-between border-b-2 md:border-b-0 border-gray-100 md:h-20 h-16 md:mt-1 md:justify-start md:space-x-10 md:px-8 px-2 ">
           <div className="flex justify-start lg:w-0 lg:flex-1 ">
-            <a href="/">
+            <button onClick={() => navigate("/")}>
               <span className="sr-only">Balance App</span>
-              <img
-                className="md:h-14 h-8 w-auto "
-                src={logo}
-                alt="logo"
-              />
-            </a>
+              <img className="md:h-14 h-8 w-auto " src={logo} alt="logo" />
+            </button>
           </div>
           <div className="-my-2 -mr-2 md:hidden">
             <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
@@ -25,18 +24,18 @@ export default function NavBarTop() {
           </div>
 
           <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-            <a
-              href="/"
+            <button
+              onClick={() => navigate("/login")}
               className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
             >
               Iniciar Sesión
-            </a>
-            <a
-              href="/"
+            </button>
+            <button
+              onClick={() => navigate("/create-account")}
               className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-blue-600 hover:bg-blue-800 px-4 py-2 text-base font-medium text-white shadow-sm "
             >
               Crear cuenta
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -58,11 +57,7 @@ export default function NavBarTop() {
             <div className="px-5 pt-5 pb-4">
               <div className="flex items-center justify-between ">
                 <div>
-                  <img
-                    className="h-10 w-auto "
-                    src={logo}
-                    alt="logo"
-                  />
+                  <img className="h-10 w-auto " src={logo} alt="logo" />
                 </div>
                 <div className="-mr-2">
                   <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
@@ -74,17 +69,20 @@ export default function NavBarTop() {
             </div>
             <div className="space-y-6 py-6 px-5">
               <div>
-                <a
-                  href="/"
+                <button
+                  onClick={() => navigate("/create-account")}
                   className="flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 hover:bg-blue-800  px-4 py-2 text-base font-medium text-white shadow-sm "
                 >
                   Crear cuenta
-                </a>
+                </button>
                 <p className="mt-6 text-center text-base font-medium text-gray-500">
                   ¿Estás registrado?{" "}
-                  <a href="/" className="text-blue-600 hover:text-sky-500 ">
+                  <button
+                    onClick={() => navigate("/login")}
+                    className="text-blue-600 hover:text-sky-500 "
+                  >
                     Inicia sesión
-                  </a>
+                  </button>
                 </p>
               </div>
             </div>
