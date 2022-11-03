@@ -1,16 +1,13 @@
 import React from "react";
-import NavBarTop from "../../components/navbar/index";
 import CreateAccountForm from "../../components/create-account-form/index";
-import Footer from "../../components/footer";
+import UnAuthLayout from "../../layouts/unauth-layout";
 
 const CreateAccount = () => {
   return (
     <>
-      <div className="h-screen w-screen overflow-hidden ">
-        <NavBarTop />
+      <UnAuthLayout>
         <CreateAccountForm />
-        <Footer />
-      </div>
+      </UnAuthLayout>
     </>
   );
 };
