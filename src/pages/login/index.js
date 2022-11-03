@@ -1,15 +1,15 @@
 import React from "react";
-import LandingContent from "../../components/landing-content/index";
+import LoginForm from "../../components/login-form/index";
 import UnAuthLayout from "../../layouts/unauth-layout";
 
-const LandingPage = () => {
+const Login = () => {
   return (
     <>
       <UnAuthLayout>
-        <LandingContent />
+        <LoginForm />
       </UnAuthLayout>
     </>
   );
 };
 
-export default LandingPage;
+export default Login;

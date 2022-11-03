@@ -7,13 +7,13 @@ import { useNavigate } from "react-router-dom";
 export default function NavBarTop() {
   const navigate = useNavigate();
   return (
-    <Popover className="relative bg-white  ">
+    <Popover className=" w-full top-0 bg-white">
       <div className="mx-auto md:px-12 px-2 ">
-        <div className="flex items-center justify-between border-b-2 md:border-b-0 border-gray-100 md:h-20 h-16 md:mt-1 md:justify-start md:space-x-10 md:px-8 px-2 ">
+        <div className="flex items-center justify-between md:h-20 h-16 md:mt-1 md:justify-start md:space-x-10 md:px-6 px-2 ">
           <div className="flex justify-start lg:w-0 lg:flex-1 ">
             <button onClick={() => navigate("/")}>
               <span className="sr-only">Balance App</span>
-              <img className="md:h-14 h-8 w-auto " src={logo} alt="logo" />
+              <img className="md:h-12 h-8 w-auto " src={logo} alt="logo" />
             </button>
           </div>
           <div className="-my-2 -mr-2 md:hidden">
@@ -28,7 +28,7 @@ export default function NavBarTop() {
               onClick={() => navigate("/login")}
               className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
             >
-              Iniciar Sesión
+              Iniciar sesión
             </button>
             <button
               onClick={() => navigate("/create-account")}

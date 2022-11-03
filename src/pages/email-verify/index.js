@@ -1,15 +1,14 @@
 import React from "react";
-import LandingContent from "../../components/landing-content/index";
+import EmailTokenVerify from "../../components/email-token-verify/index";
 import UnAuthLayout from "../../layouts/unauth-layout";
-
-const LandingPage = () => {
+const EmailVerify = () => {
   return (
     <>
       <UnAuthLayout>
-        <LandingContent />
+        <EmailTokenVerify />
       </UnAuthLayout>
     </>
   );
 };
 
-export default LandingPage;
+export default EmailVerify;
