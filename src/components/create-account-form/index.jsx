@@ -3,6 +3,7 @@ import AlertView from "../alertview/index";
 import LoadingSpinner from "../misc/loading-spinner";
 import { createUser } from "../../services/api/users/index";
 import { useNavigate } from "react-router-dom";
+
 const CreateAccountForm = () => {
   const navigate = useNavigate();
   const usernameRef = useRef(null);
@@ -13,6 +14,7 @@ const CreateAccountForm = () => {
   const [alert, setAlert] = useState(null);
   const [loading, setLoading] = useState(false);
   const [login, setLogin] = useState(false);
+  
   const submitHandler = (event) => {
     event.preventDefault();
     submitButtonRef.current.setAttribute("disabled", "disabled");

@@ -6,4 +6,10 @@ const login = async (body) => {
   return response.data;
 };
 
-export { login };
+const refresh = async (body) => {
+  const response = await axios.post(endPoints.auth.refresh, body);
+  return response.data;
+};
+
+export { login,refresh };
+

@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import useAuthStore from "../../hooks/useAuthStore";
 
 const Dashboard = () => {
-  const navigate = useNavigate();
+  const { auth } = useAuthStore();
 
   useEffect(() => {
     console.log("llamada a la api");
@@ -11,7 +11,7 @@ const Dashboard = () => {
   return (
     <>
       <div className="w-screen h-screen flex justify-center items-center">
-        <h1 className="block"> DASHBOARD</h1>
+        <h1 className="block"> DASHBOARD Hello:{auth.user.username} </h1>
       </div>
     </>
   );

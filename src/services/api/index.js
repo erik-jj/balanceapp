@@ -8,6 +8,8 @@ const endPoints = {
   },
   auth: {
     login: `${API}/api/${VERSION}/auth/login`,
+    refresh: `${API}/api/${VERSION}/auth/refresh`,
+
   },
 
   //   auth: {

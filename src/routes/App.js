@@ -7,7 +7,7 @@ import PasswordChange from "../pages/password-change/index";
 import PasswordRecovery from "../pages/password-recovery/index";
 import EmailVerify from "../pages/email-verify/index";
 import Dashboard from "../pages/dashboard";
-import PrivateRoutes from "../utils/PrivateRoutes";
+import PrivateRoutes from "../utils/private-routes";
 
 function App() {
   return (
