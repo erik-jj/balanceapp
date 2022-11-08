@@ -1,8 +1,10 @@
 import React, { useRef, useState } from "react";
+import Cookie from "js-cookie";
 import { useNavigate } from "react-router-dom";
-import useAuthStore from "../../hooks/useAuthStore";
+import useUserStore from "../../hooks/useUserStore";
 import { login } from "../../services/api/auth/index";
 import AlertView from "../alertview";
+import LoadingSpinner from "../misc/loading-spinner";
 
 const LoginForm = () => {
   const emailRef = useRef(null);
@@ -13,11 +15,12 @@ const LoginForm = () => {
 
   const [alert, setAlert] = useState(null);
   const [loading, setLoading] = useState(false);
-  const { setAuth } = useAuthStore();
+  const { setUser } = useUserStore();
 
   const SubmitHandler = (event) => {
     event.preventDefault();
     submitButtonRef.current.setAttribute("disabled", "disabled");
+    recoveryButtonRef.current.setAttribute("disabled", "disabled");
     setAlert(null);
     setLoading(true);
     const email = emailRef.current.value;
@@ -37,19 +40,29 @@ const LoginForm = () => {
           });
           setLoading(false);
           submitButtonRef.current.removeAttribute("disabled");
+          recoveryButtonRef.current.removeAttribute("disabled");
         } else {
-          setAuth(res);
+          console.log(res);
+          setUser(res.user);
+          Cookie.set("token", res.token, { expires: 1 });
           navigate("/home");
         }
       })
       .catch((error) => {
-        console.log(error);
-        setAlert({
-          message: "No autorizado, comprueba tus credenciales de inicio.",
-          color: "failure",
-        });
+        if (error.message === "Network Error") {
+          setAlert({
+            message: "Error de conexión, intente mas tarde.",
+            color: "failure",
+          });
+        } else {
+          setAlert({
+            message: "No autorizado, comprueba tus credenciales de inicio.",
+            color: "failure",
+          });
+        }
         setLoading(false);
         submitButtonRef.current.removeAttribute("disabled");
+        recoveryButtonRef.current.removeAttribute("disabled");
       });
   };
 
@@ -111,7 +124,11 @@ const LoginForm = () => {
                   type="submit"
                   className="rounded-md  bg-blue-600 hover:bg-blue-800 w-2/4 py-2 text-base font-semibold text-white shadow-sm "
                 >
-                  Iniciar sesión
+                  {loading ? (
+                    <LoadingSpinner message={"Procesando..."} />
+                  ) : (
+                    "Iniciar sesión"
+                  )}
                 </button>
                 <button
                   ref={recoveryButtonRef}

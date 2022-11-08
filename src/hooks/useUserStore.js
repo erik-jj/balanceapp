@@ -9,15 +9,14 @@ const initialState = {
     username: "",
     createdAt: "",
   },
-  token: "",
 };
 
-const useAuthStore = create(
+const useUserStore = create(
   persist(
     (set) => ({
-      auth: initialState,
-      setAuth: (data) => set((state) => ({ auth: data })),
-      removeAuth: () => set((state) => (state.auth = initialState)),
+      user: initialState,
+      setUser: (data) => set((state) => ({ user: data })),
+      removeUser: () => set((state) => ({ user: initialState })),
     }),
     {
       name: "user",
@@ -26,4 +25,4 @@ const useAuthStore = create(
   )
 );
 
-export default useAuthStore;
+export default useUserStore;

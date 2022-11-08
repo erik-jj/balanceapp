@@ -1,17 +1,19 @@
 import React, { useEffect } from "react";
-import useAuthStore from "../../hooks/useAuthStore";
+import useUserStore from "../../../hooks/useUserStore";
 
 const Dashboard = () => {
-  const { auth } = useAuthStore();
+  const { user } = useUserStore();
+  const { removeUser } = useUserStore();
 
   useEffect(() => {
-    console.log("llamada a la api");
+    console.log("remove user");
+    removeUser();
   }, []);
 
   return (
     <>
       <div className="w-screen h-screen flex justify-center items-center">
-        <h1 className="block"> DASHBOARD Hello:{auth.user.username} </h1>
+        <h1 className="block">DASHBOARD Hello:{user.username} </h1>
       </div>
     </>
   );

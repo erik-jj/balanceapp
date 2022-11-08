@@ -6,8 +6,11 @@ import Login from "../pages/login/index";
 import PasswordChange from "../pages/password-change/index";
 import PasswordRecovery from "../pages/password-recovery/index";
 import EmailVerify from "../pages/email-verify/index";
-import Dashboard from "../pages/dashboard";
+import Dashboard from "../pages/private/dashboard";
 import PrivateRoutes from "../utils/private-routes";
+import Reasons from "../pages/private/reasons";
+import Registers from "../pages/private/registers";
+import Profile from "../pages/private/profile";
 
 function App() {
   return (
@@ -19,11 +22,12 @@ function App() {
         <Route path="/password-recovery" element={<PasswordRecovery />}></Route>
         <Route path="/password-change" element={<PasswordChange />}></Route>
         <Route path="/email-verify" element={<EmailVerify />}></Route>
-
         <Route element={<PrivateRoutes />}>
           <Route path="/home" element={<Dashboard />}></Route>
+          <Route path="/reasons" element={<Reasons />}></Route>
+          <Route path="/registers" element={<Registers />}></Route>
+          <Route path="/profile" element={<Profile />}></Route>
         </Route>
-
         <Route path="*" element={<p>Not found</p>}></Route>
       </Routes>
     </BrowserRouter>

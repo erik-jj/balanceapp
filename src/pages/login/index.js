@@ -1,14 +1,14 @@
+import Cookie from "js-cookie";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../../components/login-form/index";
-import useAuthStore from "../../hooks/useAuthStore";
 import UnAuthLayout from "../../layouts/unauth-layout";
 
 const Login = () => {
-  let auth = useAuthStore((state) => state.auth);
+  const token = Cookie.get("token");
   const navigate = useNavigate();
   useEffect(() => {
-    if (auth.token) {
+    if (token) {
       navigate("/home");
     }
   }, []);

@@ -1,11 +1,8 @@
-import React, { useRef, useState } from "react";
-
+import React, { useRef } from "react";
 
 const PasswordChangeForm = () => {
   const passwordRef = useRef(null);
   const rePasswordRef = useRef(null);
-
-
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -74,7 +71,6 @@ const PasswordChangeForm = () => {
               </div>
             </div>
           </form>
-
         </div>
       </div>
     </>
