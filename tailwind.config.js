@@ -14,5 +14,6 @@ module.exports = {
     require("flowbite/plugin"),
     require("@tailwindcss/forms"),
     require("tw-elements/dist/plugin"),
+    require("daisyui"),
   ],
 };
