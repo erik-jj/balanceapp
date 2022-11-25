@@ -7,12 +7,13 @@ import { refresh } from "../services/api/auth";
 const PrivateRoutes = () => {
   const { setUser, removeUser } = useUserStore();
   const tokenLoaded = Cookie.get("token");
+
   useEffect(() => {
     if (tokenLoaded) {
       refresh({ token: tokenLoaded })
         .then((res) => {
           setUser(res.user);
-          Cookie.set("token", res.token, { expires: 5 });
+          Cookie.set("token", res.token, { expires: 15 });
         })
         .catch((err) => {
           removeUser();
@@ -21,10 +22,12 @@ const PrivateRoutes = () => {
         });
     } else {
       removeUser();
+      Cookie.remove("token");
+      console.log("Invalid session");
     }
   }, []);
 
-  return true ? <Outlet /> : <Navigate to="/login" />;
+  return tokenLoaded ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default PrivateRoutes;

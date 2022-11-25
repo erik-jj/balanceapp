@@ -33,8 +33,8 @@ export const options = {
   },
   layout: {
     padding: {
-      left: 50,
-      right: 50,
+      left: 0,
+      right: 0,
     },
   },
   responsive: true,
@@ -50,38 +50,65 @@ export const options = {
     },
   },
 };
-const lastDayInMonth = moment().daysInMonth();
-console.log(lastDayInMonth);
 
-const labels = [1,5,10,15,20,lastDayInMonth];
+export default function LineChart({ props }) {
+  const { registers, view } = props;
+  const lastDayInMonth = moment().daysInMonth();
+  const labels = [];
+  const gastos = [];
+  const ingresos = [];
+  const balance = [];
+  let ingresoTmp = 0;
+  let gastoTmp = 0;
+  let balanceTmp = 0;
+  for (let i = 1; i <= lastDayInMonth; i++) {
+    const filteredRegisters = registers.filter(
+      (register) => moment(register.createdAt).date() === i
+    );
+    if (filteredRegisters.length > 0) {
+      labels.push(i);
+      ingresoTmp = 0;
+      gastoTmp = 0;
+      for (let j = 0; j < filteredRegisters.length; j++) {
+        if (filteredRegisters[j].reason.isIncome) {
+          ingresoTmp += parseInt(filteredRegisters[j].amount);
+        } else {
+          gastoTmp += parseInt(filteredRegisters[j].amount);
+        }
+      }
+      balanceTmp += ingresoTmp - gastoTmp;
+      balance.push(balanceTmp);
+      ingresos.push(ingresoTmp);
+      gastos.push(gastoTmp);
+    }
+  }
 
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: "Ingresos",
-      data: ["1000", "2000", "3000", "5000", "6000"],
-      borderColor: "rgb(255, 99, 132)",
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
-    },
-    {
-      label: "Gastos",
-      data: ["100", "1500", "3000", "4000", "4800"],
-      borderColor: "rgb(53, 162, 235)",
-      backgroundColor: "rgba(53, 162, 235, 0.5)",
-    },
-    {
-      label: "Balance",
-      data: ["900", "500", "0", "1000", "1200"],
-      borderColor: "rgb(53, 162, 235)",
-      backgroundColor: "rgba(53, 162, 235, 0.5)",
-    },
-  ],
-};
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: "Ingresos",
+        data: ingresos,
+        borderColor: "rgb(14, 102, 85 )",
+        backgroundColor: "rgba(14, 102, 85 , 0.5)",
+      },
+      {
+        label: "Gastos",
+        data: gastos,
+        borderColor: "rgb(192, 57, 43)",
+        backgroundColor: "rgba(192, 57, 43, 0.5)",
+      },
+      {
+        label: "Balance",
+        data: balance,
+        borderColor: "rgb(43, 57, 192)",
+        backgroundColor: "rgba(43, 57, 192, 0.5)",
+      },
+    ],
+  };
 
-export default function LineChart() {
   return (
-    <div className="mx-auto" style={{ width: "80%" }}>
+    <div className="mx-auto" style={{ width: view.width }}>
       <Line options={options} data={data} />
     </div>
   );
