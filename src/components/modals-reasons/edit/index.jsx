@@ -7,6 +7,9 @@ import { ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { updateReason } from "../../../services/api/reasons/index";
 import Cookies from "js-cookie";
 import useDataStore from "../../../hooks/useDataStore";
+import LoadingSpinner from "../../misc/loading-spinner";
+import AlertView from "../../alertview";
+
 const EditReasonModal = () => {
   const arrayTypes = [
     { id: 1, name: "Positivo", isIncome: true },
@@ -22,6 +25,7 @@ const EditReasonModal = () => {
   );
   const nameRef = useRef(null);
   const confirmButtonRef = useRef(null);
+
   const submitHandler = (event) => {
     event.preventDefault();
     confirmButtonRef.current.setAttribute("disabled", "disabled");
@@ -29,6 +33,7 @@ const EditReasonModal = () => {
     setLoading(true);
     const name = nameRef.current.value;
     const type = selectedType;
+    console.log(name.trim().length);
     if (name.trim() === "" || name.trim().length < 3) {
       setAlert({ message: "Nombre invalido", color: "failure" });
       setLoading(false);
@@ -46,7 +51,6 @@ const EditReasonModal = () => {
         setCurrentReason({});
       })
       .catch((error) => {
-        console.log(error);
         setAlert({
           message: "Ha ocurrido un error, intentalo nuevamente",
           color: "failure",
@@ -185,9 +189,14 @@ const EditReasonModal = () => {
               type="submit"
               className="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-blue-600 hover:bg-blue-800 px-4 py-2 text-base font-medium text-white shadow-sm "
             >
-              <p className="text-base font-medium">Confirmar</p>
+              {loading ? (
+                <LoadingSpinner message={"Procesando..."} />
+              ) : (
+                <p className="text-base font-medium">Confirmar</p>
+              )}
             </button>
           </div>
+          {alert ? <AlertView props={alert} /> : <></>}
         </form>
       </div>
     </>

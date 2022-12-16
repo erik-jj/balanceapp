@@ -7,15 +7,18 @@ import { ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { createRegister } from "../../../services/api/registers/index";
 import Cookies from "js-cookie";
 import useDataStore from "../../../hooks/useDataStore";
+import AlertView from "../../alertview";
+import LoadingSpinner from "../../misc/loading-spinner";
 const AddRegisterModal = () => {
   const { reasons, fetchCurrentMonthRegisters } = useDataStore();
   const tokenLoaded = Cookies.get("token");
   const [alert, setAlert] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [selectedReason, setSelectedReason] = useState(reasons[0]||[]);
+  const [selectedReason, setSelectedReason] = useState(reasons[0] || []);
   const { setModalAdd } = useModalRegister();
   const amountRef = useRef(null);
   const confirmButtonRef = useRef(null);
+
   const submitHandler = (event) => {
     event.preventDefault();
     confirmButtonRef.current.setAttribute("disabled", "disabled");
@@ -34,12 +37,10 @@ const AddRegisterModal = () => {
     };
     createRegister(formData, tokenLoaded)
       .then((res) => {
-        console.log(res);
         fetchCurrentMonthRegisters(tokenLoaded);
         setModalAdd(false);
       })
       .catch((error) => {
-        console.log(error);
         setAlert({
           message: "Ha ocurrido un error, intentalo nuevamente",
           color: "failure",
@@ -171,9 +172,14 @@ const AddRegisterModal = () => {
               type="submit"
               className="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-blue-600 hover:bg-blue-800 px-4 py-2 text-base font-medium text-white shadow-sm "
             >
-              <p className="text-base font-medium">Confirmar</p>
+              {loading ? (
+                <LoadingSpinner message={"Procesando..."} />
+              ) : (
+                <p className="text-base font-medium">Confirmar</p>
+              )}
             </button>
           </div>
+          {alert ? <AlertView props={alert} /> : <></>}
         </form>
       </div>
     </>

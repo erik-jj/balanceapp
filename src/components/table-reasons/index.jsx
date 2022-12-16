@@ -3,7 +3,6 @@ import TableRow from "./table-row";
 
 const TableReasons = ({ reasons }) => {
   useEffect(() => {
-    console.log(reasons);
   }, []);
 
   return (

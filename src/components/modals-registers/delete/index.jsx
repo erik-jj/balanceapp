@@ -5,6 +5,8 @@ import { useState } from "react";
 import { deleteRegister } from "../../../services/api/registers/index";
 import Cookies from "js-cookie";
 import useDataStore from "../../../hooks/useDataStore";
+import LoadingSpinner from "../../misc/loading-spinner";
+import AlertView from "../../alertview";
 const DeleteRegisterModal = () => {
   const token = Cookies.get("token");
   const { fetchCurrentMonthRegisters } = useDataStore();
@@ -27,7 +29,6 @@ const DeleteRegisterModal = () => {
         setCurrentRegister({});
       })
       .catch((error) => {
-        console.log(error);
         setAlert({
           message: "Ha ocurrido un error, intentalo nuevamente",
           color: "failure",
@@ -85,9 +86,14 @@ const DeleteRegisterModal = () => {
             onClick={confirmHandler}
             className="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-blue-600 hover:bg-blue-800 px-4 py-2 text-base font-medium text-white shadow-sm "
           >
-            <p className="text-base font-medium">Confirmar</p>
+            {loading ? (
+              <LoadingSpinner message={"Procesando..."} />
+            ) : (
+              <p className="text-base font-medium">Confirmar</p>
+            )}
           </button>
         </div>
+        {alert ? <AlertView props={alert} /> : <></>}
       </div>
     </>
   );

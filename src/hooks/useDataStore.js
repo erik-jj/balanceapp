@@ -2,6 +2,13 @@ import create from "zustand";
 import { getReasons } from "../services/api/reasons";
 import { getDashboardData } from "../services/api/registers";
 
+const initialState = {
+  reasons: [],
+  currentMonthRegisters: [],
+  cardsInfo: [],
+  errorMessage: "",
+};
+
 const useDataStore = create((set) => ({
   reasons: [],
   currentMonthRegisters: [],
@@ -37,5 +44,6 @@ const useDataStore = create((set) => ({
         set((state) => ({ state, errorMessage: "Ha ocurrido un error" }));
       });
   },
+  resetData: () => set((state) => ({initialState })),
 }));
 export default useDataStore;

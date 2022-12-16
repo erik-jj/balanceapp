@@ -1,5 +1,11 @@
 import create from "zustand";
 
+const initialState = {
+  currentRegister: {},
+  modalAdd: false,
+  modalEdit: false,
+  modalDelete: false,
+};
 const useModalRegister = create((set) => ({
   currentRegister: {},
   modalAdd: false,
@@ -10,5 +16,6 @@ const useModalRegister = create((set) => ({
   setModalDelete: (show) => set((state) => ({ state, modalDelete: show })),
   setCurrentRegister: (register) =>
     set((state) => ({ state, currentRegister: register })),
+  resetModalRegister: () => set((state) => ({ initialState })),
 }));
 export default useModalRegister;

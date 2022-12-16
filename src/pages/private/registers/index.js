@@ -43,9 +43,9 @@ const Reasons = () => {
           <div className="flex items-center mt-8">
             <button
               onClick={() => setModalAdd(true)}
-              className="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-blue-600 hover:bg-blue-800 px-4 py-2 text-base font-medium text-white shadow-sm "
+              className=" w-36 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-blue-600 hover:bg-blue-800 px-4 py-2 text-base font-medium text-white shadow-sm "
             >
-              <p className="text-base font-medium">Agregar Registro</p>
+              <p className="text-base font-medium" >Agregar Registro</p>
             </button>
           </div>
           <div className="mt-4 ">

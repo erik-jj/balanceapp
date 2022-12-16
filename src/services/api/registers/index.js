@@ -7,6 +7,7 @@ const createRegister = async (body, token) => {
       Authorization: "Bearer " + token,
     },
   };
+  
   const response = await axios.post(
     endPoints.registers.createRegister,
     body,

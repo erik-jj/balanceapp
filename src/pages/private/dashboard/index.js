@@ -11,6 +11,7 @@ const Dashboard = () => {
     useDataStore();
   const { user } = useUserStore();
   const [graphWidth, setGraphWidth] = useState("70%");
+
   useEffect(() => {
     const tokenLoaded = Cookies.get("token");
     if (currentMonthRegisters.length === 0) {

@@ -7,19 +7,28 @@ import { ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { updateRegister } from "../../../services/api/registers/index";
 import Cookies from "js-cookie";
 import useDataStore from "../../../hooks/useDataStore";
+import AlertView from "../../alertview";
+import LoadingSpinner from "../../misc/loading-spinner";
+import useUserStore from "../../../hooks/useUserStore";
+import { useNavigate } from "react-router-dom";
+
 const EditRegisterModal = () => {
+  const navigate = useNavigate();
+  const { removeUser } = useUserStore();
   const { reasons, fetchCurrentMonthRegisters } = useDataStore();
   const tokenLoaded = Cookies.get("token");
   const confirmButtonRef = useRef(null);
   const amountRef = useRef(null);
   const [alert, setAlert] = useState(null);
   const [loading, setLoading] = useState(false);
-  const { setModalEdit, currentRegister } = useModalRegister();
+  const { setModalEdit, currentRegister, setCurrentRegister } =
+    useModalRegister();
   const [selectedReason, setSelectedReason] = useState(
     reasons.length > 0
       ? reasons.find((reason) => reason.id === currentRegister.idReason)
       : {}
   );
+
   const submitHandler = (event) => {
     event.preventDefault();
     confirmButtonRef.current.setAttribute("disabled", "disabled");
@@ -28,6 +37,12 @@ const EditRegisterModal = () => {
     const amount = amountRef.current.value;
     if (amount < 1 && amount > 9999999) {
       setAlert({ message: "Cantidad invalida", color: "failure" });
+      setLoading(false);
+      confirmButtonRef.current.removeAttribute("disabled");
+      return;
+    }
+    if (!selectedReason) {
+      setAlert({ message: "Selecciona una razón", color: "failure" });
       setLoading(false);
       confirmButtonRef.current.removeAttribute("disabled");
       return;
@@ -43,6 +58,9 @@ const EditRegisterModal = () => {
       })
       .catch((error) => {
         console.log(error);
+        if (error.response.status === 401) {
+          navigate(0);
+        }
         setAlert({
           message: "Ha ocurrido un error, intentalo nuevamente",
           color: "failure",
@@ -175,9 +193,14 @@ const EditRegisterModal = () => {
               type="submit"
               className="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-blue-600 hover:bg-blue-800 px-4 py-2 text-base font-medium text-white shadow-sm "
             >
-              <p className="text-base font-medium">Confirmar</p>
+              {loading ? (
+                <LoadingSpinner message={"Procesando..."} />
+              ) : (
+                <p className="text-base font-medium">Confirmar</p>
+              )}
             </button>
           </div>
+          {alert ? <AlertView props={alert} /> : <></>}
         </form>
       </div>
     </>

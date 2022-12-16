@@ -43,7 +43,6 @@ const CreateAccountForm = () => {
     };
     createUser(formData)
       .then((res) => {
-        console.log(res);
         setAlert({
           message: "Se te ha enviado un correo de verificación",
           color: "info",

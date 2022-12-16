@@ -42,7 +42,6 @@ const LoginForm = () => {
           submitButtonRef.current.removeAttribute("disabled");
           recoveryButtonRef.current.removeAttribute("disabled");
         } else {
-          console.log(res);
           setUser(res.user);
           Cookie.set("token", res.token, { expires: 1 });
           navigate("/home");
