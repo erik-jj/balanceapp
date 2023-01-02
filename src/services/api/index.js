@@ -9,6 +9,10 @@ const endPoints = {
   auth: {
     login: `${API}/api/${VERSION}/auth/login`,
     refresh: `${API}/api/${VERSION}/auth/refresh`,
+    recovery: `${API}/api/${VERSION}/auth/recovery`,
+    changePassword: `${API}/api/${VERSION}/auth/change-password`,
+
+
   },
   reasons: {
     getReasons: `${API}/api/${VERSION}/reasons/`,

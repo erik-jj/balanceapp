@@ -11,5 +11,19 @@ const refresh = async (body) => {
   return response.data;
 };
 
-export { login,refresh };
+const recovery = async (body) => {
+  const response = await axios.post(endPoints.auth.recovery, body);
+  return response.data;
+};
 
+const changePassword = async (body, token) => {
+  const config = {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  };
+  const response = await axios.post(endPoints.auth.changePassword, body,config);
+  return response.data;
+};
+
+export { login, refresh, recovery,changePassword};

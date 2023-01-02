@@ -1,15 +1,53 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
+import { changePassword } from "../../services/api/auth";
+import AlertView from "../alertview";
+import LoadingSpinner from "../misc/loading-spinner";
 
 const PasswordChangeForm = () => {
   const passwordRef = useRef(null);
   const rePasswordRef = useRef(null);
+  const [alert, setAlert] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [disable, setDisable] = useState(false);
 
   const submitHandler = (event) => {
     event.preventDefault();
+    setDisable(true);
+    setAlert(null);
+    setLoading(true);
     const password = passwordRef.current.value;
     const rePassword = rePasswordRef.current.value;
-
-    //llamada a la api de crear usuario
+    if (password !== rePassword) {
+      setAlert({
+        message: "Las contraseñas deben ser iguales",
+        color: "failure",
+      });
+      setLoading(false);
+      setDisable(false);
+      return;
+    }
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
+    const formData = {
+      token,
+      password,
+    };
+    changePassword(formData)
+      .then((res) => {
+        setAlert({
+          message: "La contraseña ha sido cambiada",
+          color: "info",
+        });
+        setLoading(false);
+      })
+      .catch((error) => {
+        setAlert({
+          message: "Ha ocurrido un error, intentalo nuevamente",
+          color: "failure",
+        });
+        setLoading(false);
+        setDisable(false);
+      });
   };
 
   return (
@@ -33,6 +71,9 @@ const PasswordChangeForm = () => {
                       Nueva contraseña:
                     </label>
                     <input
+                      disabled={disable}
+                      ref={passwordRef}
+                      required
                       maxLength="15"
                       minlength="8"
                       type="password"
@@ -50,6 +91,9 @@ const PasswordChangeForm = () => {
                       Confirmar contraseña:
                     </label>
                     <input
+                      disabled={disable}
+                      ref={rePasswordRef}
+                      required
                       maxLength="15"
                       minlength="8"
                       type="password"
@@ -63,12 +107,20 @@ const PasswordChangeForm = () => {
               </div>
               <div className="pt-4 pb-8 flex flex-col justify-center items-center gap-4">
                 <button
+                  disabled={disable}
                   type="submit"
-                  className="rounded-md  bg-blue-600 hover:bg-blue-800 w-2/4 py-2 text-base font-semibold text-white shadow-sm "
+                  className="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-blue-600 hover:bg-blue-800 w-2/4 px-4 py-2 text-base font-semibold text-white shadow-sm "
                 >
-                  Cambiar contraseña
+                  {loading ? (
+                    <LoadingSpinner message={"Procesando..."} />
+                  ) : (
+                    <p className="text-base font-semibold">
+                      Cambiar contraseña
+                    </p>
+                  )}
                 </button>
               </div>
+              {alert ? <AlertView props={alert} /> : <></>}
             </div>
           </form>
         </div>
