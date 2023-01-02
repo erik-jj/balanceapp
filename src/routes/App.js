@@ -11,6 +11,7 @@ import PrivateRoutes from "../utils/private-routes";
 import Reasons from "../pages/private/reasons";
 import Registers from "../pages/private/registers";
 import Profile from "../pages/private/profile";
+import NotFound from "../components/not-found";
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
           <Route path="/registers" element={<Registers />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
         </Route>
-        <Route path="*" element={<p>Not found</p>}></Route>
+        <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </BrowserRouter>
   );
