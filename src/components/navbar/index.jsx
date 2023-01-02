@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 export default function NavBarTop() {
   const navigate = useNavigate();
   return (
-    <Popover className=" w-full top-0 bg-white">
+    <Popover className=" w-full top-0 bg-white z-10">
       <div className="mx-auto md:px-12 px-2 ">
         <div className="flex items-center justify-between md:h-20 h-16 md:mt-1 md:justify-start md:space-x-10 md:px-6 px-2 ">
           <div className="flex justify-start lg:w-0 lg:flex-1 ">
