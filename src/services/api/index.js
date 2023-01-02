@@ -5,6 +5,8 @@ const endPoints = {
   users: {
     createUser: `${API}/api/${VERSION}/users`,
     confirmEmail: `${API}/api/${VERSION}/users/confirm-email`,
+    updateUser: `${API}/api/${VERSION}/users/`,
+
   },
   auth: {
     login: `${API}/api/${VERSION}/auth/login`,

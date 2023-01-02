@@ -11,4 +11,13 @@ const confirmEmail = async (body) => {
   return response.data;
 };
 
-export { createUser, confirmEmail };
+const updateUser = async (body, token) => {
+  const config = {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  };
+  const response = await axios.patch(endPoints.users.updateUser, body, config);
+  return response.data;
+};
+export { createUser, confirmEmail, updateUser };

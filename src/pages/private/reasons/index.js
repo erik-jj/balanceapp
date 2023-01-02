@@ -30,7 +30,7 @@ const Reasons = () => {
       <AuthLayout>
         <div className="w-full flex justify-center flex-col md:py-8 md:px-8  py-4 px-2 ">
           <div className="flex justify-center">
-            <h1 className="text-2xl font-bold text-gray-700">Rasones</h1>
+            <h1 className="text-2xl font-bold text-gray-700">Razones</h1>
           </div>
           <div className="flex items-center mt-8">
             <button
