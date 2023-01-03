@@ -14,8 +14,6 @@ const PrivateRoutes = () => {
   const { resetData } = useDataStore();
   const tokenLoaded = Cookie.get("token");
   useEffect(() => {
-    console.log('cambio la ruta');
-
     if (tokenLoaded) {
       refresh({ token: tokenLoaded })
         .then((res) => {

@@ -99,7 +99,7 @@ const PasswordModal = () => {
                     ref={passwordRef}
                     required
                     maxLength="15"
-                    minlength="8"
+                    minLength="8"
                     type="password"
                     name="password"
                     placeholder="••••••••"
@@ -119,7 +119,7 @@ const PasswordModal = () => {
                     ref={rePasswordRef}
                     required
                     maxLength="15"
-                    minlength="8"
+                    minLength="8"
                     type="password"
                     name="password"
                     placeholder="••••••••"

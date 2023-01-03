@@ -2,8 +2,7 @@ import React, { useEffect } from "react";
 import TableRow from "./table-row";
 
 const TableReasons = ({ reasons }) => {
-  useEffect(() => {
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <>
@@ -30,7 +29,10 @@ const TableReasons = ({ reasons }) => {
           </thead>
           <tbody>
             {reasons.map((reason, index) => (
-              <TableRow props={{ reason, index }} />
+              <TableRow
+                key={"reasonsrow-" + reason.id}
+                props={{ reason, index }}
+              />
             ))}
           </tbody>
         </table>

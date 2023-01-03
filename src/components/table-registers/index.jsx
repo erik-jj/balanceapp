@@ -44,7 +44,10 @@ const TableRegisters = () => {
           </thead>
           <tbody>
             {registers.map((register, index) => (
-              <TableRow props={{ register, index }} />
+              <TableRow
+                key={"registersrow-" + register.id}
+                props={{ register, index }}
+              />
             ))}
           </tbody>
         </table>
