@@ -33,7 +33,7 @@ const LoginForm = () => {
 
     login(formData)
       .then((res) => {
-        if (res === "mail sent") {
+        if (res.message === "mail sent") {
           setAlert({
             message: "Se te ha enviado un correo de verificación",
             color: "info",
