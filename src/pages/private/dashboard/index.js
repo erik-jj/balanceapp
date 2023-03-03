@@ -27,7 +27,7 @@ const Dashboard = () => {
   return (
     <>
       <AuthLayout>
-        <div className="w-auto h-full grid grid-cols-3 grid-rows-6 ">
+        <div className="w-auto h-full grid grid-cols-3 grid-rows-6 md:mt-0 mt-12">
           <div className="col-span-3  md:px-12 py-4 ">
             <div className="h-full w-full flex flex-row q justify-center md:gap-8 gap-4 items-center   ">
               <Stat
@@ -38,7 +38,7 @@ const Dashboard = () => {
                       ? cardsInfo?.current?.monthIncome
                       : "- - - -"
                   }`,
-                  description: "20% ↘ ",
+                  description: " ",
                   color: "text-green-500",
                 }}
               ></Stat>
@@ -50,7 +50,7 @@ const Dashboard = () => {
                       ? cardsInfo?.current?.monthExpense
                       : "- - - -"
                   }`,
-                  description: "20% ↘ ",
+                  description: "",
                   color: "text-red-500",
                 }}
               ></Stat>{" "}
@@ -62,7 +62,7 @@ const Dashboard = () => {
                       ? cardsInfo?.current?.monthBalance
                       : "- - - -"
                   }`,
-                  description: "20% →",
+                  description: "",
                   color: "text-gray-500",
                 }}
               ></Stat>
